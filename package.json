@@ -1,0 +1,22 @@
+{
+  "name": "rbac-portal",
+  "version": "1.0.0",
+  "description": "Hierarchical Role-Based Access Control (RBAC) Portal with PostgreSQL & Prisma",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "prisma:generate": "npx prisma generate",
+    "prisma:push": "npx prisma db push"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.14.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "prisma": "^5.14.0"
+  },
+  "private": true
+}

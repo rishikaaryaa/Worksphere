@@ -1,0 +1,52 @@
+version: "3.8"
+services:
+  # PostgreSQL Database
+  task2-db:
+    image: postgres:16-alpine
+    container_name: task2-postgres-db
+    environment:
+      - POSTGRES_USER=rbac_user
+      - POSTGRES_PASSWORD=rbac_pass_2024
+      - POSTGRES_DB=rbac_portal
+    ports:
+      - "5433:5432"
+    volumes:
+      - task2_pg_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rbac_user -d rbac_portal"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Backend (Express + Prisma)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: task2-backend
+    environment:
+      - DATABASE_URL=postgresql://rbac_user:rbac_pass_2024@task2-db:5432/rbac_portal
+      - PORT=5050
+      - NODE_ENV=production
+    ports:
+      - "5050:5050"
+    depends_on:
+      task2-db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Frontend (Nginx)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: task2-frontend
+    ports:
+      - "8088:8080"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  task2_pg_data:

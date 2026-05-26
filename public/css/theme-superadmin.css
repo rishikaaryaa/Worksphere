@@ -1,0 +1,176 @@
+/* Super Admin Role CSS Override */
+
+body[data-role="super_admin"] {
+  --portal-bg: #06080f;
+  --sidebar-bg: #080b14;
+  --sidebar-border: rgba(0, 229, 255, 0.15);
+  --sidebar-text: #64748b;
+  --sidebar-item-hover-bg: rgba(0, 229, 255, 0.04);
+  --sidebar-item-hover-color: #00e5ff;
+  --sidebar-item-active-bg: linear-gradient(90deg, rgba(0, 229, 255, 0.08) 0%, transparent 100%);
+  --sidebar-item-active-border: #00e5ff;
+  --sidebar-item-active-color: #00e5ff;
+  --sidebar-header-gradient: linear-gradient(135deg, #00e5ff 0%, #7c3aed 100%);
+  --profile-widget-bg: rgba(0, 229, 255, 0.02);
+  --btn-logout-border: rgba(255, 61, 113, 0.3);
+  --btn-logout-hover-bg: rgba(255, 61, 113, 0.1);
+
+  --topbar-bg: rgba(8, 11, 20, 0.7);
+  --topbar-border: rgba(0, 229, 255, 0.12);
+  --topbar-greeting-color: #7c3aed;
+
+  --card-bg: rgba(8, 14, 28, 0.75);
+  --card-bg-hover: rgba(12, 20, 40, 0.85);
+  --card-border: rgba(0, 229, 255, 0.12);
+  --card-border-hover: rgba(0, 229, 255, 0.35);
+  --card-shadow: 0 0 20px rgba(0, 229, 255, 0.03);
+  --card-shadow-hover: 0 0 25px rgba(0, 229, 255, 0.15), 0 0 10px rgba(124, 58, 237, 0.1);
+
+  --input-bg: rgba(6, 8, 15, 0.8);
+  --input-border: rgba(0, 229, 255, 0.15);
+  --input-focus-border: #00e5ff;
+  --input-focus-shadow: rgba(0, 229, 255, 0.25);
+  --input-text: #e0e7ff;
+
+  --table-header-bg: rgba(0, 229, 255, 0.04);
+  --table-border: rgba(0, 229, 255, 0.08);
+  --table-row-hover-bg: rgba(0, 229, 255, 0.03);
+  --table-row-stripe-bg: transparent;
+
+  --modal-bg: rgba(8, 11, 20, 0.98);
+  --modal-overlay: rgba(3, 4, 8, 0.85);
+  
+  --mailbox-bg: rgba(8, 11, 20, 0.97);
+  --mailbox-item-bg: rgba(0, 229, 255, 0.02);
+  --mailbox-item-hover-bg: rgba(0, 229, 255, 0.05);
+  --mailbox-item-hover-border: rgba(0, 229, 255, 0.4);
+  --mailbox-text-subject: #e0e7ff;
+
+  --radius-card: 12px;
+  --radius-input: 8px;
+  --radius-button: 8px;
+
+  --font-family-body: 'Outfit', sans-serif;
+  --font-family-headings: 'Outfit', sans-serif;
+  --font-family-mono: 'JetBrains Mono', monospace;
+
+  --avatar-gradient: linear-gradient(135deg, #00e5ff 0%, #7c3aed 100%);
+  --avatar-text-color: #fff;
+  --portal-bg-layer-opacity: 0.25;
+  --portal-bg-layer-filter: blur(80px);
+}
+
+/* Background gradient mesh shifts dynamically */
+body[data-role="super_admin"] .portal-bg-layer {
+  background: radial-gradient(at 10% 20%, rgba(0, 229, 255, 0.18) 0px, transparent 50%),
+              radial-gradient(at 80% 80%, rgba(124, 58, 237, 0.14) 0px, transparent 50%),
+              radial-gradient(at 50% 10%, rgba(255, 61, 113, 0.08) 0px, transparent 40%);
+  background-size: 200% 200%;
+  animation: meshShift 20s ease infinite;
+}
+
+/* Conic gradient rotating border around User Avatar widget */
+body[data-role="super_admin"] .user-profile-widget .user-avatar {
+  border: 2px solid transparent;
+}
+
+body[data-role="super_admin"] .user-profile-widget .user-avatar::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #00e5ff, #7c3aed, #ff3d71, #00e5ff);
+  z-index: -1;
+  animation: ringRotate 4s linear infinite;
+}
+
+/* Pulsing accent border for the top-bar */
+body[data-role="super_admin"] .top-bar {
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, rgba(0, 229, 255, 0.12), rgba(124, 58, 237, 0.25), rgba(0, 229, 255, 0.12)) 1;
+}
+
+/* Cybernetic scanline pattern across table headers */
+body[data-role="super_admin"] .data-table th {
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 229, 255, 0.02),
+    rgba(0, 229, 255, 0.02) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+/* Font updates for code block aesthetics */
+body[data-role="super_admin"] code,
+body[data-role="super_admin"] td strong,
+body[data-role="super_admin"] .data-table td:first-child,
+body[data-role="super_admin"] .readonly-input {
+  font-family: var(--font-family-mono) !important;
+  font-size: 12px;
+  letter-spacing: -0.2px;
+}
+
+/* Submit and Primary Button Neon glow styling */
+body[data-role="super_admin"] .btn-submit,
+body[data-role="super_admin"] .btn-primary {
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.25);
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
+  background-color: #00e5ff;
+  color: #06080f;
+  font-weight: 700;
+  transition: var(--transition-smooth);
+}
+
+body[data-role="super_admin"] .btn-submit:hover,
+body[data-role="super_admin"] .btn-primary:hover {
+  background-color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.45);
+  transform: translateY(-1.5px);
+}
+
+/* Refresh Button Styling */
+body[data-role="super_admin"] .btn-refresh {
+  border-color: rgba(0, 229, 255, 0.2);
+  color: #00e5ff;
+  transition: var(--transition-smooth);
+}
+
+body[data-role="super_admin"] .btn-refresh:hover {
+  background-color: rgba(0, 229, 255, 0.05);
+  border-color: #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+/* Tier Nodes glow for Super Admin active tier */
+body[data-role="super_admin"] .tier-node.active-tier {
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.15);
+}
+
+/* Modal and Mailbox header branding overlays */
+body[data-role="super_admin"] .modal-header h3,
+body[data-role="super_admin"] .mailbox-header h3 {
+  background: linear-gradient(135deg, #00e5ff 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+/* Scrollbar tweaks */
+body[data-role="super_admin"] ::-webkit-scrollbar-track {
+  background: #06080f;
+}
+
+body[data-role="super_admin"] ::-webkit-scrollbar-thumb {
+  background: rgba(0, 229, 255, 0.12);
+  border: 1px solid rgba(0, 229, 255, 0.05);
+  border-radius: 4px;
+}
+
+body[data-role="super_admin"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 229, 255, 0.25);
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+}

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Office 365 Work Portal | Hierarchical RBAC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css?v=1.1">
+  <link rel="stylesheet" href="css/animations.css?v=1.1">
+  <link rel="stylesheet" href="css/theme-superadmin.css?v=1.1">
+  <link rel="stylesheet" href="css/theme-admin.css?v=1.1">
+  <link rel="stylesheet" href="css/theme-user.css?v=1.1">
+</head>
+<body>
+
+  <!-- AUTH WRAPPER -->
+  <div id="auth-container" class="auth-wrapper">
+    <div class="auth-background-mesh"></div>
+    <div class="auth-card-container">
+      <div class="auth-card">
+        <div class="ms-logo-grid">
+          <div class="logo-box red"></div><div class="logo-box green"></div>
+          <div class="logo-box blue"></div><div class="logo-box yellow"></div>
+        </div>
+        <div class="portal-tag">Microsoft</div>
+
+        <!-- LOGIN -->
+        <div id="screen-login" class="auth-screen active">
+          <h2 class="auth-title">Sign in</h2>
+          <p class="auth-subtitle">to continue to your work portal</p>
+          <form id="login-form" class="auth-form">
+            <div class="form-group"><input type="email" id="login-email" required placeholder="Email, phone, or Skype"><span class="focus-border"></span></div>
+            <div class="form-group"><input type="password" id="login-password" required placeholder="Password"><span class="focus-border"></span></div>
+            <div class="auth-links">
+              <span class="auth-link-text">No account? <a href="#" id="link-to-signup" class="ms-link">Create one!</a></span>
+              <a href="#" id="link-to-forgot" class="ms-link">Can't access your account?</a>
+            </div>
+            <div class="btn-group"><button type="submit" class="btn btn-primary" id="btn-login">Sign in</button></div>
+          </form>
+        </div>
+
+        <!-- SIGNUP -->
+        <div id="screen-signup" class="auth-screen">
+          <h2 class="auth-title">Create account</h2>
+          <p class="auth-subtitle">set up your work account profile</p>
+          <form id="signup-form" class="auth-form">
+            <div class="form-group"><input type="text" id="signup-name" required placeholder="Full Name"><span class="focus-border"></span></div>
+            <div class="form-group"><input type="email" id="signup-email" required placeholder="someone@example.com"><span class="focus-border"></span></div>
+            <div class="form-group"><input type="password" id="signup-password" required placeholder="Create Password"><span class="focus-border"></span></div>
+            <div class="auth-links"><span class="auth-link-text">Already have an account? <a href="#" id="link-to-login" class="ms-link">Sign in</a></span></div>
+            <div class="btn-group"><button type="submit" class="btn btn-primary" id="btn-signup">Register</button></div>
+          </form>
+        </div>
+
+        <!-- FORGOT PASSWORD -->
+        <div id="screen-forgot" class="auth-screen">
+          <h2 class="auth-title">Reset password</h2>
+          <p class="auth-subtitle">Enter your email and we'll send you an OTP</p>
+          <form id="forgot-form" class="auth-form">
+            <div class="form-group"><input type="email" id="forgot-email" required placeholder="someone@example.com"><span class="focus-border"></span></div>
+            <div class="auth-links"><a href="#" id="link-forgot-to-login" class="ms-link">Back to sign in</a></div>
+            <div class="btn-group"><button type="submit" class="btn btn-primary" id="btn-send-otp">Send OTP</button></div>
+          </form>
+        </div>
+
+        <!-- OTP RESET -->
+        <div id="screen-reset" class="auth-screen">
+          <h2 class="auth-title">Enter OTP & Reset</h2>
+          <p class="auth-subtitle">An OTP has been sent to your simulated mailbox</p>
+          <form id="reset-form" class="auth-form">
+            <div class="form-group"><input type="text" id="reset-otp" required placeholder="6-digit OTP code" maxlength="6"><span class="focus-border"></span></div>
+            <div class="form-group"><input type="password" id="reset-password" required placeholder="New Password"><span class="focus-border"></span></div>
+            <div class="auth-links"><a href="#" id="link-reset-to-login" class="ms-link">Cancel</a></div>
+            <div class="btn-group"><button type="submit" class="btn btn-primary" id="btn-reset-pw">Reset Password</button></div>
+          </form>
+        </div>
+
+        <div id="auth-alert" class="auth-alert-banner"></div>
+      </div>
+      <div class="auth-card-footer"><a href="#">Terms of use</a><a href="#">Privacy & cookies</a><span>...</span></div>
+    </div>
+  </div>
+
+  <!-- PORTAL DASHBOARD -->
+  <div id="portal-container" class="portal-wrapper hidden">
+    <div id="portal-bg-layer" class="portal-bg-layer"></div>
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="ms-logo-grid-mini"><div class="logo-box red"></div><div class="logo-box green"></div><div class="logo-box blue"></div><div class="logo-box yellow"></div></div>
+        <h3>Office 360</h3>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item active" data-target="panel-work"><i class="fa-solid fa-briefcase"></i><span>Work Portal</span></li>
+          <li class="nav-item admin-only hidden" data-target="panel-users"><i class="fa-solid fa-users-gear"></i><span>User Management</span></li>
+          <li class="nav-item" data-target="panel-logs"><i class="fa-solid fa-clock-rotate-left"></i><span>Activity Logs</span></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile-widget">
+          <div class="user-avatar" id="sidebar-user-avatar">U</div>
+          <div class="user-info"><h4 id="sidebar-user-name">Loading...</h4><span id="sidebar-user-role" class="badge">User</span></div>
+        </div>
+        <button id="btn-logout" class="btn btn-logout" title="Sign Out"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Sign Out</span></button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="top-bar">
+        <div class="page-title-section"><h1 id="topbar-page-title">Work Portal</h1><p id="topbar-page-subtitle">Submit and review operations</p><span id="topbar-greeting" class="topbar-greeting"></span></div>
+        <div class="top-bar-actions"><span class="role-badge" id="topbar-role-badge">Role: Standard User</span><div class="avatar-icon" id="topbar-avatar">S</div></div>
+      </header>
+
+      <div class="content-body">
+        <!-- WORK PANEL -->
+        <section id="panel-work" class="dashboard-panel active">
+          <div class="grid-layout-2">
+            <div class="card glassmorphism">
+              <div class="card-header"><h3><i class="fa-solid fa-pen-to-square"></i> Client Registration Form</h3><p>Register a client's information to log your work</p></div>
+              <form id="work-form" class="standard-form">
+                <div class="form-row"><label for="work-client-name">Client Name</label><input type="text" id="work-client-name" required placeholder="e.g., Acme Corporation"></div>
+                <div class="form-row"><label for="work-client-email">Client Contact Email</label><input type="email" id="work-client-email" required placeholder="e.g., billing@acme.com"></div>
+                <div class="form-row"><label for="work-notes">Operation Notes / Scope</label><textarea id="work-notes" rows="4" placeholder="Briefly describe the work completed..."></textarea></div>
+                <button type="submit" class="btn btn-submit"><i class="fa-solid fa-cloud-arrow-up"></i> Submit Client Record</button>
+              </form>
+            </div>
+            <div class="card glassmorphism-blue">
+              <div class="card-header"><h3><i class="fa-solid fa-shield-halved"></i> RBAC Rules & Policy</h3><p>Access privileges for your current role tier</p></div>
+              <div class="rbac-info-box">
+                <div class="role-tier-display"><span class="tier-label">Hierarchical Rank</span>
+                  <div class="tier-flow"><div class="tier-node" id="tier-node-user">User</div><i class="fa-solid fa-chevron-right"></i><div class="tier-node" id="tier-node-admin">Admin</div><i class="fa-solid fa-chevron-right"></i><div class="tier-node" id="tier-node-superadmin">Super Admin</div></div>
+                </div>
+                <ul class="policy-list">
+                  <li><i class="fa-solid fa-check text-success"></i> Users can submit new client registrations.</li>
+                  <li><i class="fa-solid fa-circle-info text-info"></i> Users can only view their own submissions.</li>
+                  <li><i class="fa-solid fa-xmark text-danger"></i> Users <strong>cannot delete</strong> any client records.</li>
+                  <li><i class="fa-solid fa-circle-check text-primary"></i> Admins and Super Admins can see all records.</li>
+                  <li><i class="fa-solid fa-triangle-exclamation text-warning"></i> Only Super Admins can delete client records.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card glassmorphism mt-4">
+            <div class="card-header table-header"><div><h3><i class="fa-solid fa-list-check"></i> Submissions Directory</h3><p id="work-list-summary">Showing your records</p></div><button class="btn btn-refresh" id="btn-refresh-work"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button></div>
+            <div class="table-responsive">
+              <table id="work-table" class="data-table">
+                <thead><tr><th>Record ID</th><th>Submitted By</th><th>Client Name</th><th>Client Email</th><th>Notes</th><th>Date</th><th class="superadmin-only hidden">Actions</th></tr></thead>
+                <tbody id="work-table-body"><tr><td colspan="7" class="loading-cell">Loading...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- USER MANAGEMENT PANEL -->
+        <section id="panel-users" class="dashboard-panel">
+          <div class="grid-layout-2" id="admin-controls-grid">
+            <div id="superadmin-create-user-card" class="card glassmorphism superadmin-only hidden">
+              <div class="card-header"><h3><i class="fa-solid fa-user-plus"></i> Administrative User Creation</h3><p>Register a new system user and allocate an RBAC role</p></div>
+              <form id="admin-create-user-form" class="standard-form">
+                <div class="form-row"><label for="admin-user-name">Full Name</label><input type="text" id="admin-user-name" required placeholder="Jane Doe"></div>
+                <div class="form-row"><label for="admin-user-email">Email Address</label><input type="email" id="admin-user-email" required placeholder="jane@office.com"></div>
+                <div class="form-row"><label for="admin-user-password">Temporary Password</label><input type="text" id="admin-user-password" required placeholder="TempPass456!"></div>
+                <div class="form-row"><label for="admin-user-role">Role Tier</label><select id="admin-user-role" required><option value="user">User</option><option value="admin">Admin</option><option value="super_admin">Super Admin</option></select></div>
+                <button type="submit" class="btn btn-submit"><i class="fa-solid fa-user-shield"></i> Provision Account & Send Mail</button>
+              </form>
+            </div>
+            <div class="card glassmorphism" id="user-directory-card">
+              <div class="card-header table-header"><div><h3><i class="fa-solid fa-users"></i> System Accounts Directory</h3><p>All portal users</p></div><button class="btn btn-refresh" id="btn-refresh-users"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button></div>
+              <div class="table-responsive">
+                <table id="users-table" class="data-table">
+                  <thead><tr><th>User ID</th><th>Full Name</th><th>Email</th><th>Role</th><th>Created</th><th class="superadmin-only hidden">Actions</th></tr></thead>
+                  <tbody id="users-table-body"><tr><td colspan="6" class="loading-cell">Loading...</td></tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- LOGS PANEL -->
+        <section id="panel-logs" class="dashboard-panel">
+          <div class="card glassmorphism">
+            <div class="card-header table-header"><div><h3><i class="fa-solid fa-clock-rotate-left"></i> Security Log Audit</h3><p id="logs-list-summary">Review your actions</p></div><button class="btn btn-refresh" id="btn-refresh-logs"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button></div>
+            <div class="table-responsive">
+              <table id="logs-table" class="data-table">
+                <thead><tr><th>Log ID</th><th>User</th><th>Email</th><th>Role</th><th>Action</th><th>Details</th><th>IP</th><th>Time</th></tr></thead>
+                <tbody id="logs-table-body"><tr><td colspan="8" class="loading-cell">Loading...</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- PASSWORD CHANGE MODAL -->
+  <div id="modal-change-password" class="modal">
+    <div class="modal-content glassmorphism">
+      <div class="modal-header"><h3><i class="fa-solid fa-key"></i> Password Override</h3><button class="modal-close" id="btn-close-pwd-modal">&times;</button></div>
+      <form id="admin-change-password-form" class="standard-form">
+        <input type="hidden" id="change-pwd-userid">
+        <div class="form-row"><label>Target Account</label><input type="text" id="change-pwd-email" readonly class="readonly-input"></div>
+        <div class="form-row"><label for="change-pwd-newpwd">New Password</label><input type="password" id="change-pwd-newpwd" required placeholder="Enter new password"></div>
+        <div class="modal-actions"><button type="button" class="btn btn-secondary" id="btn-cancel-pwd-modal">Cancel</button><button type="submit" class="btn btn-primary">Update Password</button></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MAILBOX WIDGET -->
+  <button id="btn-toggle-mailbox" class="mailbox-toggle-btn" title="Open Simulated Mailbox">
+    <div class="mailbox-icon-wrapper"><i class="fa-solid fa-envelope"></i><span class="badge-dot hidden" id="mail-unread-dot"></span></div><span>Simulated Mailbox</span>
+  </button>
+  <div id="mailbox-drawer" class="mailbox-drawer">
+    <div class="mailbox-header"><h3><i class="fa-solid fa-envelope-open-text text-primary"></i> Developer Mailbox</h3><div class="mailbox-header-actions"><button id="btn-clear-mailbox" class="btn btn-clear-mail" title="Clear"><i class="fa-solid fa-trash-can"></i></button><button id="btn-close-mailbox" class="mailbox-close-btn">&times;</button></div></div>
+    <div class="mailbox-subheader"><p>Simulates outgoing server mail (sign-up confirmations and OTPs).</p></div>
+    <div class="mailbox-content" id="mailbox-list"><div class="empty-mailbox-msg"><i class="fa-solid fa-envelope-open"></i><p>No messages yet.</p><span>Triggers on registration or password reset.</span></div></div>
+  </div>
+
+  <script src="js/api.js?v=1.1"></script>
+  <script src="js/app.js?v=1.1"></script>
+</body>
+</html>

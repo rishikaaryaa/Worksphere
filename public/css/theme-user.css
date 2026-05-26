@@ -1,0 +1,192 @@
+/* User Role Light Theme Override */
+
+body[data-role="user"] {
+  --portal-bg: #f8fafc;
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #e2e8f0;
+  --sidebar-text: #475569;
+  --sidebar-item-hover-bg: #f1f5f9;
+  --sidebar-item-hover-color: #0f172a;
+  --sidebar-item-active-bg: rgba(59, 130, 246, 0.08);
+  --sidebar-item-active-border: #3b82f6;
+  --sidebar-item-active-color: #3b82f6;
+  --sidebar-header-gradient: linear-gradient(135deg, #0f172a 0%, #3b82f6 100%);
+  --profile-widget-bg: #f8fafc;
+  --btn-logout-border: rgba(239, 68, 68, 0.2);
+  --btn-logout-hover-bg: rgba(239, 68, 68, 0.05);
+
+  --topbar-bg: rgba(255, 255, 255, 0.8);
+  --topbar-border: #e2e8f0;
+  --topbar-greeting-color: #3b82f6;
+
+  --card-bg: #ffffff;
+  --card-bg-hover: #ffffff;
+  --card-border: #e2e8f0;
+  --card-border-hover: #cbd5e1;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.08);
+  --card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --input-focus-border: #3b82f6;
+  --input-focus-shadow: rgba(59, 130, 246, 0.15);
+  --input-text: #1e293b;
+
+  --table-header-bg: #f8fafc;
+  --table-border: #e2e8f0;
+  --table-row-hover-bg: #f1f5f9;
+  --table-row-stripe-bg: transparent;
+
+  --modal-bg: #ffffff;
+  --modal-overlay: rgba(15, 23, 42, 0.30);
+  
+  --mailbox-bg: #ffffff;
+  --mailbox-item-bg: #f8fafc;
+  --mailbox-item-hover-bg: #f1f5f9;
+  --mailbox-item-hover-border: #3b82f6;
+  --mailbox-text-subject: #0f172a;
+
+  --radius-card: 16px;
+  --radius-input: 12px;
+  --radius-button: 10px;
+
+  --font-family-body: 'Inter', sans-serif;
+  --font-family-headings: 'Inter', sans-serif;
+  
+  --avatar-gradient: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  --avatar-text-color: #ffffff;
+  --portal-bg-layer-opacity: 0;
+  --portal-bg-layer-filter: none;
+
+  /* Text color variables to invert the dark-mode text */
+  --db-text: #1e293b;
+  --db-text-muted: #64748b;
+}
+
+/* User portal light-theme specific style overrides */
+
+/* Avatar icon in top-bar */
+body[data-role="user"] .avatar-icon {
+  background: #f1f5f9;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+}
+
+/* Read-only inputs for modals/forms */
+body[data-role="user"] .readonly-input {
+  background-color: #f1f5f9 !important;
+  color: #64748b !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Close button hovers for light layouts */
+body[data-role="user"] .modal-close:hover,
+body[data-role="user"] .mailbox-close-btn:hover {
+  color: #0f172a;
+}
+
+/* Mailbox items expanded view */
+body[data-role="user"] .mail-item.expanded {
+  background-color: #f1f5f9;
+  border-color: #3b82f6;
+}
+
+/* OTP code text snippet accessibility */
+body[data-role="user"] .otp-highlight {
+  background-color: rgba(59, 130, 246, 0.08);
+  border-color: #3b82f6;
+  color: #2563eb;
+}
+
+/* Inactive policy nodes */
+body[data-role="user"] .tier-node {
+  background-color: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #64748b;
+}
+
+/* Active nodes for policy checklist */
+body[data-role="user"] #tier-node-user.active-tier {
+  background-color: rgba(14, 165, 233, 0.12);
+  color: #0369a1;
+  border-color: #0ea5e9;
+}
+
+body[data-role="user"] #tier-node-admin.active-tier {
+  background-color: rgba(168, 85, 247, 0.12);
+  color: #7e22ce;
+  border-color: #a855f7;
+}
+
+body[data-role="user"] #tier-node-superadmin.active-tier {
+  background-color: rgba(239, 68, 68, 0.12);
+  color: #b91c1c;
+  border-color: #ef4444;
+}
+
+/* User portal submission button style */
+body[data-role="user"] .btn-submit,
+body[data-role="user"] .btn-primary {
+  background-color: #3b82f6;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.15);
+}
+
+body[data-role="user"] .btn-submit:hover,
+body[data-role="user"] .btn-primary:hover {
+  background-color: #2563eb;
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.25);
+  transform: translateY(-0.5px);
+}
+
+/* Refresh button */
+body[data-role="user"] .btn-refresh {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+  color: #475569;
+}
+
+body[data-role="user"] .btn-refresh:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+/* Developer Mailbox toggle button styling */
+body[data-role="user"] .mailbox-toggle-btn {
+  background-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+body[data-role="user"] .mailbox-toggle-btn:hover {
+  background-color: #2563eb;
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
+}
+
+/* RBAC Rules display box */
+body[data-role="user"] .card.glassmorphism-blue {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(255, 255, 255, 0.8) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  color: #1e293b;
+}
+
+/* Darken standard alert highlights for contrast */
+body[data-role="user"] .text-success { color: #16a34a; }
+body[data-role="user"] .text-danger { color: #dc2626; }
+body[data-role="user"] .text-warning { color: #d97706; }
+body[data-role="user"] .text-info { color: #2563eb; }
+body[data-role="user"] .text-primary { color: #3b82f6; }
+
+/* Light scrollbars track & thumb */
+body[data-role="user"] ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+body[data-role="user"] ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+body[data-role="user"] ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

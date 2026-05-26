@@ -1,0 +1,54 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   // 'super_admin' | 'admin' | 'user'
+  createdAt DateTime @default(now())
+  work      Work[]
+  logs      Log[]
+}
+
+model Work {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userName    String
+  clientName  String
+  clientEmail String
+  notes       String?
+  createdAt   DateTime @default(now())
+}
+
+model Log {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userName  String
+  email     String
+  role      String
+  action    String
+  details   String
+  ip        String
+  timestamp DateTime @default(now())
+}
+
+model Email {
+  id        String   @id @default(uuid())
+  to        String
+  subject   String
+  body      String
+  type      String
+  otp       String?
+  timestamp DateTime @default(now())
+}
